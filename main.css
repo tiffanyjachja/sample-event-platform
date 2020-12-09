@@ -1,0 +1,421 @@
+/* Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved. */
+/* SPDX-License-Identifier: MIT-0 */
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+ul[class],
+ol[class] {
+    padding: 0;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+ul[class],
+ol[class] {
+    list-style: none;
+}
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+article > * + * {
+    margin-top: 1em;
+}
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+img:not([alt]) {
+    filter: blur(10px);
+}
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Variables */
+:root {
+    --radius: 12px;
+    
+    --text-color-light: #000;
+    --text-alt-color-light: #777;
+    
+    --text-color-dark: #fff;
+    --text-alt-color-dark: #777;
+    
+    --bg-color-light: #e9e9e9;
+    --bg-color-dark: #191e29;
+    
+    --bg-alt-color-light: #e9e9e9;
+    --bg-alt-color-dark: #242a38;
+    
+    --bg-alt2-color-light: #ffce9d;
+    --bg-alt2-color-dark: #505b73;
+}
+
+/* Style */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu, "Helvetica Neue", sans-serif;
+    user-select: none;
+}
+
+#app {
+    background: var(--bg-color-light);
+    display: flex;
+    justify-content: center;
+}
+
+.inner {
+    max-width: 1080px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.video-wrapper {
+    width: 98%;
+    position: relative;
+    transform: translate3d(0, 0, 0);
+    z-index: 1;
+    backface-visibility: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    z-index: 2;
+}
+
+.overlay .icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    font-size: 36px;
+    animation: scale 0.2s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.2));
+}
+
+.overlay .icon.fade {
+    opacity: 0;
+}
+
+video {
+    width: 100%;
+    border-radius: var(--radius);
+    background: black;
+}
+
+.help-text {
+    width: 100%;
+    font-size: 14px;
+    color: #777;
+    text-align: right;
+}
+
+.help-text span {
+    display: block;
+    padding: 0 10px 10px 0;
+}
+
+.emoji-picker {
+    margin-top: 20px;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.emojis {
+    display: flex;
+    border-radius: 64px;
+    background: #e9e9e9;
+    position: relative;
+    box-shadow: 8px 8px 16px #d6d6d6, -8px -8px 16px #fcfcfc;
+    z-index: 4;
+}
+
+.emoji-btn {
+    width: 64px;
+    height: 64px;
+    display: block;
+    background: transparent;
+    margin: 4px 2px;
+    font-size: 36px;
+    text-align: center;
+    border-radius: 60px;
+    border: 4px solid transparent;
+    transform: scale(1);
+    transition: all 0.15s ease-in-out;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.emoji-btn:hover,
+.emoji-btn:focus {
+    transform: scale(1.1);
+    border: 4px solid var(--bg-alt2-color-light);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.emoji-btn:active {
+    transform: scale(0.9);
+}
+
+.emoji-btn.active {
+    border: 4px solid #f97b00;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+    #app {
+        background: var(--bg-color-dark);
+    }
+    
+    .emojis {
+        background: var(--bg-alt-color-dark);
+        box-shadow: 8px 8px 16px #151a23, -8px -8px 16px #1d232f;
+    }
+    
+    .emoji-btn:hover,
+    .emoji-btn:focus {
+        border: 4px solid var(--bg-alt2-color-dark);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .emoji-btn.active {
+        background: rgba(255, 255, 255, 0.2);
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.6);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#header {
+    position: relative;
+    background: #FFF;
+}
+
+#header .container {
+    position: relative;
+    padding: 4em 0em;
+}
+
+#nav {
+    position: absolute;
+    right: 0em;
+    top: 2.2em;
+}
+#nav > ul > li {
+    float: left;
+}
+
+#nav > ul > li:last-child
+{
+    padding-right: 0;
+}
+
+#nav > ul > li > a,
+#nav > ul > li > span {
+    display: block;
+    margin-left: 0.7em;
+    padding: 0.80em 1.2em;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    outline: 0;
+    color: #333;
+}
+
+#nav li.active a {
+    background: #e95d3c;
+    border-radius: 5px;
+    color: #FFF;
+}
+
+#nav > ul > li > ul {
+    display: none;
+}
+
+#logo{
+    position: absolute;
+    display: block;
+    left: 5em;
+    top: 2.2em;
+}
+
+
+#logo a{
+    display: block;
+    text-decoration: none;
+    font-size: .3em;
+    font-weight: 400;
+}
+
+.demo {
+    display: flex;
+    justify-content: center;
+}
+
+.video-js {
+    display: flex;
+    font-size: 10px;
+    color: #fff;
+}
+
+.vjs-default-skin .vjs-big-play-button {
+    /* The font size is what makes the big play button...big.
+    All width/height values use ems, which are a multiple of the font size.
+    If the .video-js font-size is 10px, then 3em equals 30px.*/
+    font-size: 3em;
+    /* We're using SCSS vars here because the values are used in multiple places.
+    Now that font size is set, the following em values will be a multiple of the
+    new font size. If the font-size is 3em (30px), then setting any of
+    the following values to 3em would equal 30px. 3 * font-size. */
+    /* 1.5em = 45px default */
+    line-height: 1.5em;
+    height: 1.5em;
+    width: 3em;
+    /* 0.06666em = 2px default */
+    border: 0.06666em solid #fff;
+    /* 0.3em = 9px default */
+    border-radius: 0.3em;
+    /* Align center */
+
+    left: 50%;
+    top: 50%;
+    margin-left: -1.5em;
+    margin-top: -0.75em;
+}
+
+/* The default color of control backgrounds is mostly black but with a little
+bit of blue so it can still be seen on all-black video frames, which are common. */
+.video-js .vjs-control-bar,
+.video-js .vjs-big-play-button,
+.video-js .vjs-menu-button .vjs-menu-content {
+    /* IE8 - has no alpha support */
+    background-color: #2B333F;
+    /* Opacity: 1.0 = 100%, 0.0 = 0% */
+    background-color: rgba(43, 51, 63, 0.7);
+}
+
+/* Slider - used for Volume bar and Progress bar */
+.video-js .vjs-slider {
+    background-color: #73859f;
+    background-color: rgba(115, 133, 159, 0.5);
+}
+
+/* The slider bar color is used for the progress bar and the volume bar
+(the first two can be removed after a fix that's coming) */
+.video-js .vjs-volume-level,
+.video-js .vjs-play-progress,
+.video-js .vjs-slider-bar {
+    background: #fff;
+}
+
+/* The main progress bar also has a bar that shows how much has been loaded. */
+.video-js .vjs-load-progress {
+    /* For IE8 we'll lighten the color */
+    background: #bfc7d3;
+    /* Otherwise we'll rely on stacked opacities */
+    background: rgba(115, 133, 159, 0.5);
+}
+
+/* The load progress bar also has internal divs that represent
+smaller disconnected loaded time ranges */
+.video-js .vjs-load-progress div {
+    /* For IE8 we'll lighten the color */
+    background: white;
+    /* Otherwise we'll rely on stacked opacities */
+    background: rgba(115, 133, 159, 0.75);
+}
+.video-container {
+    width: 640px;
+    height: 480px;
+    margin: 15px;
+}
+.src-container-direct {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.src-input {
+        padding: 10px 5px;
+        width: 186px;
+        width: 400px;
+    }
+
+.src-submit {
+    height: 37px;
+    border-color: #ddd;
+    margin: 1px 5px
+}
+.video-js .vjs-menu-button-popup .vjs-menu {
+    left: auto;
+    right: 0;
+}

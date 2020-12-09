@@ -1,0 +1,35 @@
+{
+    "name": "sample-event-app",
+    "version": "1.0.0",
+    "description": "Code Sample for the Amazon IVS Player Web SDK",
+    "main": "",
+    "scripts": {
+        "build": "webpack --config ./webpack.config.js",
+        "lint": "tsc --noEmit --project ./tsconfig.json",
+        "bundle": "npm-run-all lint build",
+        "watch:tsc": "tsc-watch --project ./tsconfig.json --noEmit",
+        "watch:webpack": "webpack-dev-server --config ./webpack.config.js --watch --compress",
+        "start": "npm-run-all --parallel watch:*"
+    },
+    "dependencies": {
+        "amazon-ivs-player": "^1.2.0",
+        "video.js": "7.6.6"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.9.0",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/preset-env": "^7.9.5",
+        "@babel/preset-typescript": "^7.9.0",
+        "@types/video.js": "^7.3.8",
+        "babel-loader": "^8.1.0",
+        "copy-webpack-plugin": "^6.1.0",
+        "css-loader": "^5.0.1",
+        "file-loader": "^6.0.0",
+        "npm-run-all": "^4.1.5",
+        "tsc-watch": "^4.2.3",
+        "typescript": "^3.8.3",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.11.0"
+    }
+}
