@@ -41,6 +41,6 @@ const events: VideoJSEvents = player.getIVSEvents();
 const ivsPlayer = player.getIVSPlayer();
 ivsPlayer.addEventListener(events.PlayerState.PLAYING, () => { console.log('IVS Player is playing') });
 
-player.src('https://4973279a5947.us-east-1.playback.live-video.net/api/video/v1/us-east-1.379051855587.channel.qUyS3QAkf1zS.m3u8'
-);
+// Modify the PLAY_BACK_URL if the playback url of your stream
+player.src('PLAY_BACK_URL');
 
